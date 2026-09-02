@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>speakjoy — a journal you talk to</title>
+<meta name="description" content="Speak, and it writes itself down. A voice journal for the web and for iPhone.">
+<meta property="og:title" content="speakjoy — a journal you talk to">
+<meta property="og:description" content="Speak, and it writes itself down. A voice journal for the web and for iPhone.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://speakjoy.co">
+<link rel="icon" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f2ead6; --paper2:#ece2c9; --ink:#3d372e; --pencil:#6b6355;
+  --navy:#004e7b; --seal:#7d2e40; --line:rgba(61,55,46,.14);
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --print:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--print); -webkit-font-smoothing:antialiased;
+  /* the dotted leaf the app writes on */
+  background-image:radial-gradient(rgba(61,55,46,.14) 1.1px, transparent 1.1px);
+  background-size:30px 30px;
+}
+.wrap{max-width:1000px; margin:0 auto; padding:0 26px}
+a{color:inherit}
+
+/* ---- the corner ---- */
+header{padding:26px 0 0}
+.mark{height:44px; width:auto; display:block}
+
+/* ---- hero ---- */
+.hero{padding:70px 0 76px; max-width:760px}
+h1{
+  font-family:var(--serif); font-weight:600; letter-spacing:-.01em;
+  font-size:clamp(40px,7.2vw,74px); line-height:1.04; margin:0 0 22px;
+}
+h1 em{font-style:normal; color:var(--navy)}
+.lede{
+  font-family:var(--serif); font-size:clamp(19px,2.5vw,25px); line-height:1.5;
+  color:var(--pencil); margin:0 0 34px; max-width:56ch;
+}
+.doors{display:flex; flex-wrap:wrap; gap:12px}
+.door{
+  display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  padding:14px 24px; border-radius:999px; font-size:13px; letter-spacing:.11em;
+  text-transform:uppercase; font-weight:600; transition:transform .2s, box-shadow .2s;
+}
+.door:hover{transform:translateY(-2px)}
+.door.solid{background:var(--navy); color:#fff; box-shadow:0 8px 22px -12px rgba(0,78,123,.9)}
+.door.hollow{border:1px solid var(--line); color:var(--ink); background:rgba(255,255,255,.5)}
+.door small{font-size:11px; opacity:.7; letter-spacing:.06em; text-transform:none}
+
+/* ---- sections ---- */
+section{padding:58px 0; border-top:1px solid var(--line)}
+.eyebrow{
+  font-size:10px; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--pencil); margin:0 0 14px;
+}
+h2{
+  font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,40px);
+  line-height:1.14; margin:0 0 16px; letter-spacing:-.005em;
+}
+.say{font-family:var(--serif); font-size:19px; line-height:1.6; color:var(--pencil); max-width:60ch; margin:0 0 26px}
+
+/* two offerings, side by side */
+.pair{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+.card{
+  background:rgba(255,255,255,.62); border:1px solid var(--line);
+  border-radius:18px; padding:28px 26px 26px; position:relative;
+}
+.card h3{
+  font-family:var(--serif); font-size:26px; font-weight:600; margin:0 0 4px;
+}
+.card .where{font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--pencil); margin:0 0 16px}
+.card p{font-family:var(--serif); font-size:17px; line-height:1.55; color:var(--pencil); margin:0 0 18px}
+ul.pts{list-style:none; margin:0 0 22px; padding:0}
+ul.pts li{
+  font-size:14.5px; line-height:1.5; padding:7px 0 7px 22px; position:relative; color:var(--ink);
+}
+ul.pts li::before{
+  content:""; position:absolute; left:4px; top:15px;
+  width:5px; height:5px; border-radius:50%; background:var(--navy); opacity:.55;
+}
+
+/* the feature grid */
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px}
+.bit h4{font-family:var(--serif); font-size:19px; font-weight:600; margin:0 0 6px}
+.bit p{font-size:14.5px; line-height:1.55; color:var(--pencil); margin:0}
+
+/* how it goes */
+.steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; counter-reset:s}
+.step{counter-increment:s; position:relative; padding-top:8px}
+.step::before{
+  content:counter(s); font-family:var(--serif); font-size:38px; font-weight:600;
+  color:var(--navy); opacity:.28; display:block; line-height:1; margin-bottom:8px;
+}
+.step h4{font-family:var(--serif); font-size:20px; font-weight:600; margin:0 0 6px}
+.step p{font-size:14.5px; line-height:1.55; color:var(--pencil); margin:0}
+
+footer{
+  border-top:1px solid var(--line); padding:36px 0 54px;
+  display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap;
+}
+footer .fine{font-size:12.5px; color:var(--pencil)}
+footer a{color:var(--navy); text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media (max-width:820px){
+  .pair,.grid,.steps{grid-template-columns:1fr}
+  .hero{padding:52px 0 56px}
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#16181c; --paper2:#101216; --ink:#ded7ca; --pencil:#9c9487;
+        --navy:#7db4d8; --line:rgba(222,215,202,.16)}
+  body{background-image:radial-gradient(rgba(222,215,202,.13) 1.1px, transparent 1.1px)}
+  .card{background:rgba(255,255,255,.045)}
+  .door.solid{background:var(--navy); color:#0f1115}
+  .door.hollow{background:rgba(255,255,255,.04)}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <img class="mark" src="logo.svg" alt="speakjoy">
+</header>
+
+<div class="wrap hero">
+  <h1>A journal you <em>talk to</em>.</h1>
+  <p class="lede">
+    Speaking is faster than writing and truer than typing — you say the thing
+    you actually meant before you have time to tidy it. speakjoy listens, writes
+    it down in your hand, and leaves it on the page where it belongs.
+  </p>
+  <div class="doors">
+    <a class="door solid" href="https://speakjoy.app">Open the web journal</a>
+    <a class="door hollow" href="#iphone">On iPhone <small>coming to the App&nbsp;Store</small></a>
+  </div>
+</div>
+
+<section class="wrap">
+  <p class="eyebrow">How it goes</p>
+  <div class="steps">
+    <div class="step">
+      <h4>Press once and speak</h4>
+      <p>No dictation button to hold down. It hears when you stop and closes the take itself.</p>
+    </div>
+    <div class="step">
+      <h4>It writes itself down</h4>
+      <p>Transcribed, punctuated and broken into paragraphs, then set on a ruled page in a handwriting face.</p>
+    </div>
+    <div class="step">
+      <h4>It stays a journal</h4>
+      <p>Dated, bound into a book you chose the cloth for, and searchable when you want to find it again.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">Two ways in</p>
+  <h2>The same journals, wherever you are.</h2>
+  <div class="pair">
+    <div class="card">
+      <h3>On the web</h3>
+      <p class="where">speakjoy.app</p>
+      <p>The full desk. A shelf of books you can page through, with room to arrange
+         and read at length.</p>
+      <ul class="pts">
+        <li>A shelf of journals, each in its own cloth and ink</li>
+        <li>Real pages that turn, ruled how you like them</li>
+        <li>Dotted, lined, graph, fine graph or blank — per journal</li>
+        <li>Photographs dropped straight onto the page, framed</li>
+        <li>Guided prompts by category, kept as collections</li>
+        <li>Nothing to install</li>
+      </ul>
+      <a class="door solid" href="https://speakjoy.app">Start writing</a>
+    </div>
+    <div class="card" id="iphone">
+      <h3>On iPhone</h3>
+      <p class="where">Native app</p>
+      <p>Built for the moment worth catching — the one where opening a laptop
+         is already too much friction to bother.</p>
+      <ul class="pts">
+        <li>Home and lock screen widgets that start a recording</li>
+        <li>Pick up where you left off, in a journal of your choice</li>
+        <li>A live orb that moves with your voice while you speak</li>
+        <li>Browse prompts mid-sentence without stopping</li>
+        <li>Recent photographs at a glance</li>
+        <li>Your journals, on the shelf, in your pocket</li>
+      </ul>
+      <a class="door hollow" href="#">Coming to the App Store</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">The details</p>
+  <h2>Made like a book, not a text box.</h2>
+  <p class="say">
+    Everything here exists because a real journal has it: paper you chose, ink
+    that stays the same, a date at the head of the day, room for a photograph.
+  </p>
+  <div class="grid">
+    <div class="bit">
+      <h4>Your own hand</h4>
+      <p>Six handwriting faces, set on a baseline grid so the words sit on the rule rather than float above it.</p>
+    </div>
+    <div class="bit">
+      <h4>Cloth and ink</h4>
+      <p>Thirty-nine bindings from pale to oxblood to black, and five inks — chosen per journal.</p>
+    </div>
+    <div class="bit">
+      <h4>One day, one head</h4>
+      <p>The date is written once. Speak again the same day and it carries only the hour.</p>
+    </div>
+    <div class="bit">
+      <h4>Photographs</h4>
+      <p>Print, taped, corners, deckle or bare. Sized to the page so a picture never becomes the entry.</p>
+    </div>
+    <div class="bit">
+      <h4>Guided prompts</h4>
+      <p>Collections by part of life — gratitude, stress and anxiety, work and success — kept and carried into a session.</p>
+    </div>
+    <div class="bit">
+      <h4>Find anything</h4>
+      <p>Search everything you have ever said. Every entry, every journal, by keyword.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <span class="fine">© <span id="y">2026</span> speakjoy</span>
+  <span class="fine"><a href="https://speakjoy.app">speakjoy.app</a> · the journal itself</span>
+</footer>
+
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>
